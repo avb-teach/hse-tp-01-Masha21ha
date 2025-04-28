@@ -2,15 +2,15 @@
 input_dir="$1"
 output_dir="$2"
 files=$(find $input_dir -maxdepth 1 -type f)
-dirs=$(find $input_dir -maxdepth 1 -type d)
+dirs=$(find "$input_dir" -maxdepth 1 -type d)
+
 
 for file in $files; do
-	if [ -e "$file" ]; then
-		cp "$file" "$output_dir"
-	else
-		echo "$file does not exist"
-	fi
+  if [ -e "$file" ]; then
+    cp "$file" "$output_dir"
+  fi
 done
+
 for dir in $dirs; do
   if [ -d "$dir" ]; then
     inter_files=$(find "$dir" -type f)
@@ -27,9 +27,5 @@ for dir in $dirs; do
       
       cp "$file" "$new_filename"
     done
-
-  else
-    echo "$dir is not a valid directory"
   fi
 done
-
